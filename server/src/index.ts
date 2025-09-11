@@ -17,7 +17,8 @@ app.get('/api/hello', (c) => {
 });
 
 // --- Static Files (client build) ---
-app.use("*", serveStatic({ root: "../client/dist" }));
+app.use("/*", serveStatic({ root: "../client/dist" }));
+app.get("*", serveStatic({ root: "../client/dist", path: "index.html" }));
 
 // === SERVER & AUTH ===
 //Serve the server with its routes and tls if needed.
