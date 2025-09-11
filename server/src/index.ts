@@ -23,7 +23,8 @@ app.use("*", serveStatic({ root: "../client/dist" }));
 //Serve the server with its routes and tls if needed.
 const ENV: string = process.env.BUILD || "DEV";
 const PORT: number = ENV === "PROD" ? 443 : Number(process.env.PORT);
-export default {
+
+const server = Bun.serve({
 	port: PORT,
 	fetch: app.fetch,
 	tls: ENV === "PROD"
@@ -32,4 +33,6 @@ export default {
     		cert: Bun.file(process.env.TLS_CERT_PATH!)
 		}
 		: undefined,
-}
+});
+
+console.log(`Started ${ENV === "PROD"?"production":"development"} server: https://${server.hostname}:${server.port}`);
