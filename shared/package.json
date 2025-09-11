@@ -1,5 +1,12 @@
 {
 	"name": "shared",
-	"private": true,
-	"type": "module"
+	"version": "0.0.1",
+	"main": "dist/index.js",
+	"scripts": {
+		"build": "tsc",
+		"dev": "tsc --watch"
+	},
+	"devDependencies": {
+		"typescript": "^5.8.3"
+	}
 }
