@@ -5,9 +5,18 @@ body {
     'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #37353E;
+  color: #D3DAD9;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.yan{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
 }
