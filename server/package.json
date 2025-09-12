@@ -1,10 +1,11 @@
 {
 	"name": "server",
 	"scripts": {
-		"dev": "bun --watch run src/index.ts",
-		"start": "bun run src/index.ts"
+		"dev": "bun --watch run index.ts",
+		"start": "bun run index.ts"
 	},
 	"dependencies": {
-		"hono": "^4.9.6"
+		"hono": "^4.9.6",
+		"zod": "^4.1.8"
 	}
 }

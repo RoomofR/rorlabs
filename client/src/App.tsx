@@ -14,6 +14,10 @@ const routes = [
 		component: lazy(() => import("./pages/Yan")),
 	},
 	{
+		path: "/mb",
+		component: lazy(() => import("./pages/Marketboard")),
+	},
+	{
 		path: "*404",
 		component: lazy(() => import("./pages/NotFound")),
 	},

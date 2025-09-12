@@ -2,6 +2,9 @@ import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { serveStatic } from "hono/bun";
 
+import startAllWorkers from "./workers";
+startAllWorkers();
+
 // === ROUTES ===
 const app = new Hono();
 app.use(cors());
@@ -12,7 +15,10 @@ app.get('/hello', (c) => {
 });
 
 // --- API Routes ---
-app.get('/api/hello', (c) => {
+import apiRoutes from "./routes/api"; 
+app.route("/api", apiRoutes);
+
+app.get('/api', (c) => {
 	return c.json({message:"hello world"});
 });
 

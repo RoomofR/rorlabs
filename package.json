@@ -8,7 +8,7 @@
 		"./client",
 		"./shared"
 	],
-	"scripts":{
+	"scripts": {
 		"server:dev": "bun run --cwd server dev",
 		"client:dev": "bun run --cwd client dev",
 		"build": "bun run --cwd client build",
@@ -18,6 +18,6 @@
 		"@types/bun": "latest"
 	},
 	"peerDependencies": {
-		"typescript": "^5"
+		"typescript": "^5.9.2"
 	}
 }
