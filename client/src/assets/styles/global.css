@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+	--text: #f2e5ec;
+	--background: #171516;
+	--foreground: #2c2a2b;
+	--primary: #c4b4bd;
+	--secondary: #991626;
+	--accent: #e12f2e;
+}
+
+body{
+	background-color: var(--background);
+	color: var(--text);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-family: "Roboto", sans-serif;
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+}
+
+#root{
+	height: 100vh;
+}

@@ -1,0 +1,31 @@
+.container {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: "Archivo", sans-serif;
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: 1rem;
+}
+
+.image {
+	width: 20vw;
+	height: auto;
+}
+
+.title {
+	font-size: clamp(1.5rem, 5vw, 3rem);
+	font-weight: bold;
+	text-align: center;
+}
+
+.subtext {
+	font-size: clamp(1rem, 3vw, 1.5rem);
+	font-style: italic;
+}
