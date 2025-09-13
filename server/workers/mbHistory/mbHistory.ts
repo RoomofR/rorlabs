@@ -177,7 +177,8 @@ interface MarketSummaryRow {
   newest: number;
 }
 
-function updateMarketBoardStatus(){
+function updateMarketBoardStats(){
+	console.log("update stats");
 	const market_summary = db.prepare(`
 	SELECT 
 		item_id,
@@ -187,27 +188,29 @@ function updateMarketBoardStatus(){
 	FROM sale_history
 	GROUP BY item_id
 	`).all() as MarketSummaryRow[];
+	
+	try{
+		db.transaction(() => {
+			for (const row of market_summary) {
+				try{
+					db.run(`
+						UPDATE last_updated
+						SET count = ?, oldest = ?, newest = ?
+						WHERE item_id = ?
+					`,
+						[row.count, row.oldest, row.newest, row.item_id]
+					);
+				} catch (err) {
+					console.error("SQLite Error:", err);
+				}
 
-	db.transaction(() => {
-	for (const row of market_summary) {
-		db.run(
-		`
-		INSERT INTO last_updated (item_id, count, oldest, newest)
-		VALUES (?, ?, ?, ?)
-		ON CONFLICT(item_id) DO UPDATE SET
-			count = excluded.count,
-			oldest = excluded.oldest,
-			newest = excluded.newest
-		`,
-			[
-				row.item_id,
-				row.count,
-				row.oldest,
-				row.newest
-			]
-		);
+			}
+		})();
+	} catch (err) {
+		console.error("SQLite Error:", err);
 	}
-	})();
+
+	console.log(market_summary.length,"stats done!")
 }
 
 //--- Main ---
@@ -240,7 +243,7 @@ async function checkAndUpdateMBData(){
 	console.log(`${total_insertions} total entries added to sale history database`);
 
 	//Update the stats on last_updated
-	updateMarketBoardStatus();
+	updateMarketBoardStats();
 }
 
 function msUntilNextHour() {
