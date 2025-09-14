@@ -30,7 +30,7 @@ export default function Marketboard(){
 								<tr>
 									<td>{item.id}</td>
 									<td>{item.item_id}</td>
-									<td>{new Date(item.timestamp * 1000).toLocaleString()}</td>
+									<td>{new Date(item.timestamp).toLocaleString()}</td>
 									<td>{item.count}</td>
 									<td>{new Date(item.newest * 1000).toLocaleString()}</td>
 									<td>{new Date(item.oldest * 1000).toLocaleString()}</td>
