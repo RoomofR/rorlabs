@@ -1,6 +1,7 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { serveStatic } from "hono/bun";
+import { proxy } from "hono/proxy";
 
 import startAllWorkers from "./workers";
 startAllWorkers();
@@ -20,6 +21,21 @@ app.route("/api", apiRoutes);
 
 app.get('/api', (c) => {
 	return c.json({message:"hello world"});
+});
+
+// --- Silver Bullet Docker App ---
+app.all("/sb/*", (c) => {
+	const originalPath = c.req.url.replace(/^\/sb/, "");
+	const target = `http://localhost:1950${originalPath}`;
+
+	return proxy(target, {
+		raw: c.req.raw,
+		headers: {
+			...c.req.header(),
+			"X-Forwarded-Host": c.req.header("host"),
+			"X-Forwarded-For": c.req.header("x-forwarded-for") ?? c.req.header("host"),
+		}
+	});
 });
 
 // --- Static Files (client build) ---
