@@ -27,7 +27,7 @@ app.get('/api', (c) => {
 app.all("/sb/*", (c) => {
 	const url = new URL(c.req.url);
 	const targetPath = url.pathname.replace(/^\/sb/, "") + url.search;
-	const target = `http://localhost:1953${targetPath}`;
+	const target = `http://localhost:1950${targetPath}`;
 
 	return proxy(target, {
 		raw: c.req.raw,
