@@ -25,16 +25,12 @@ app.get('/api', (c) => {
 
 // --- Silver Bullet Docker App ---
 app.all("/sb/*", (c) => {
-	const originalPath = c.req.url.replace(/^\/sb/, "");
-	const target = `http://localhost:1950${originalPath}`;
+	const url = new URL(c.req.url);
+	const targetPath = url.pathname.replace(/^\/sb/, "") + url.search;
+	const target = `http://localhost:1953${targetPath}`;
 
 	return proxy(target, {
 		raw: c.req.raw,
-		headers: {
-			...c.req.header(),
-			"X-Forwarded-Host": c.req.header("host"),
-			"X-Forwarded-For": c.req.header("x-forwarded-for") ?? c.req.header("host"),
-		}
 	});
 });
 
